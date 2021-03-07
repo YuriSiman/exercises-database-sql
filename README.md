@@ -161,19 +161,9 @@ Depois que seu pull request for mesclado, você pode excluir sua feature branch
 
 ## :pencil: Licença
 
-[![License](https://img.shields.io/badge/license-mit-%23A6CE39?style=for-the-badge&logo=github)](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc/blob/master/LICENSE)   
+[![License](https://img.shields.io/badge/license-mit-%23A6CE39?style=for-the-badge&logo=github)](https://github.com/YuriSiman/exercises-database-sql/blob/master/LICENSE)   
 
 ---
 
 Code your life...
-
-
-
-
-
-
-
-
-
-
 
