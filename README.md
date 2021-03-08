@@ -16,9 +16,16 @@ Clone este repositório em sua máquina local usando:
 git clone https://github.com/YuriSiman/exercises-database-sql.git
 ```
 
+## :clipboard: Tópicos
+
+* [Conceitos](https://github.com/YuriSiman/exercises-database-sql#conceitos)  
+* [Exercícios](https://github.com/YuriSiman/exercises-database-sql#exercicios)  
+
 --- 
 
 ## :rocket: Vamos Começar  
+
+## Conceitos
 
 ## SGBD
 
@@ -59,7 +66,19 @@ Um esquema de relação está na 3FN:
 
 ## Tipos de Dados Disponíveis  
 
-BD1_07_sql_ddl.pdf pág 15
+Tipo de Dados | Descrição
+------------ | -------------
+CHAR(n) | Strings de caracteres de tamanho fixo
+VARCHAR(n) | Strings de caracteres de tamanho variável
+INT | Números inteiros (2^10)
+SMALLINT | Números inteiros pequenos (2^5)
+NUMERIC(p,s) | Números exatos com casas decimais Ex: NUMERIC(7,2) tem 5 inteiros e 2 decimais
+DATE | Data
+TIME | Hora
+DATETIME | Data e hora dd/mm/yyyy hh:mm:ss.ttt
+SMALLDATETIME | Data e hora dd/mm/yyyy hh:mm
+
+Data Types: https://docs.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?redirectedfrom=MSDN&view=sql-server-ver15
 
 ---
 
@@ -67,43 +86,108 @@ BD1_07_sql_ddl.pdf pág 15
 
 Os comandos DDL para **criar**, **alterar** e **remover** tabelas e outros objetos são:  
 
-* CREATE
-* ALTER
-* DROP
+* CREATE - Cria
+* ALTER - Altera
+* DROP - Remove
 
 Criando um banco de dados:
 
+Verificando se o banco de dados já existe
+```
+IF DB_ID ('Teste') IS NULL
+	CREATE DATABASE Teste
+```
+
+Ou, criando o banco de dados
 ```
 CREATE DATABASE Teste
 ```
 
-Criando tabelas:
+Entrando no contexto do banco de dados:
+
+```
+USE Teste
+```
+
+Criando tabelas com PRIMARY KEY, FOREIGN KEY, UNIQUE e definindo CONSTRAINT:
+
+* PRIMARY KEY - A constraint Primary Key (chave primaria), não permite valores nulos e impõe a exclusividade de linhas.  
+* FOREIGN KEY - Uma Foreign key (chave estrangeira), impõe a integridade referencial, ela é definida em um conjunto de atributos em que é chamada de tabela de referencia e aponta para os atributos de chaves candidatas (primary key, unique constraint).  
+* UNIQUE - A Constraint Unique, também impõe a exclusividade de linhas, porem, é um pouco parecida com a primary key, podem existir varias Unique Constraints na mesma tabela.  
+* CONSTRAINT - É usada para dar nome à restrição de integridade.  
+* IDENTITY - Tem como finalidade incrementar um valor a cada nova inserção.  
 
 ```
 CREATE TABLE Funcionario 
 (
-    CPF char(11) not null,
-    Nome varchar(100) not null,
-    Salario numeric(7,2) not null,
+    Id int IDENTITY NOT NULL,
+    CPF char(11) NOT NULL,
+    Nome varchar(100) NOT NULL,
+    Salario numeric(7,2) NOT NULL,
     Endereco varchar(200),
-    DataNascimento datetime not null,
-    PRIMARY KEY (CPF)
+    DataNascimento datetime NOT NULL,
+    Ativo char(1) NOT NULL DEFAULT 'S',
+    CONSTRAINT pk_funcionario PRIMARY KEY (Id),
+    CONSTRAINT un_funcionario UNIQUE (CPF)
 )
 
 CREATE TABLE Departamento
 (
-    Numero int not null,
-    Nome varchar(100) not null,
-    CPF_Funcionario char(11),
-    PRIMARY KEY (Numero),
-    UNIQUE (Nome),
-    FOREIGN KEY (CPF_Funcionario) REFERENCES Funcionario (CPF)
+    Id int NOT NULL,
+    Nome varchar(100) NOT NULL,
+    Id_Funcionario int IDENTITY,
+    CONSTRAINT pk_departamento PRIMARY KEY (Id),
+    CONSTRAINT un_departamento UNIQUE (Nome),
+    CONSTRAINT fk_funcionario FOREIGN KEY (Id_funcionario) REFERENCES Funcionario (Id) ON DELETE NO ACTION
 )
 ```
 
+Removendo uma tabela:  
+
+```
+DROP TABLE Departamento
+```
+
+Removendo todas as linhas de uma tabela:  
+
+```
+TRUNCATE TABLE Departamento
+```
+
+Alterar a estrutura de uma tabela, adicionando, removendo ou alterando colunas e restrições:  
+
+Incluir uma nova coluna, não é permitido configurar uma coluna NOT NULL, a menos que um valor DEFAULT seja informado, se criada como NULL, a coluna pode ser alterada depois para NOT NULL usando ALTER TABLE ... ALTER COLUMN:
+
+```
+ALTER TABLE Funcionario ADD Formacao varchar(200) NOT NULL DEFAULT 0
+```
+
+Alterar especificação da coluna (tipo de dados, NULL etc.):
+
+```
+ALTER TABLE Funcionario ADD Nivel varchar(200) NULL
+ALTER TABLE Funcionario ALTER COLUMN Nivel varchar(200) NOT NULL
+```
+
+Excluir uma coluna fisicamente:
+
+```
+ALTER TABLE Funcionario DROP COLUMN Nivel
+```
+
+Adicionar apenas uma restrição (a coluna deve existir):
+
+```
+ALTER TABLE Funcionario ADD CONSTRAINT CK_ativo CHECK (ativo = 'S' OR ativo = 'N')
+```
+
+Excluir uma restrição:
+
+```
+ALTER TABLE Funcionario DROP CONSTRAINT CK_ativo
+```
+
 ## Linguagem SQL - DML (Data Manipulation Language)  
-
-
 
 ---
 
