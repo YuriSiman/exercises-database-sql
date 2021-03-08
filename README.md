@@ -64,7 +64,7 @@ Um esquema de relação está na 3FN:
 – Se a relação estiver na 2FN.  
 – Todos os atributos da relação devem depender diretamente da chave primária, isto é, não podem depender transitivamente da chave primária.  
 
-## Tipos de Dados Disponíveis  
+## Alguns Tipos de Dados Disponíveis  
 
 Tipo de Dados | Descrição
 ------------ | -------------
