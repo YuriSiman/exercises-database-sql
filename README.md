@@ -1,412 +1,220 @@
-<h1 align="center">Banco de Dados SQL</h1>
+<div id="top"></div>
 
-<p align="center">Neste repositório seguem conceitos e exercícios a respeito de Banco de Dados SQL</p>
+<br/>
+<div align="center">
+    <img src="./readme-img/microsoftsqlserver-plain.svg" alt="Logo" width="100" height="100" />
+    <h1 align="center">SQL Server</h1>
+    <p align="center">Banco de Dados com SQL Server</p>
+</div>
 
----
+<br/>
 
-### :dart: Objetivo
+<div align="center">
+    <a href="https://github.com/YuriSiman/learn-sql-server/blob/master/LICENSE" target="_blank">
+      <img alt="LICENSE" src="https://img.shields.io/badge/license-mit-%23A6CE39?style=for-the-badge&logo=github" />
+    </a>
+    <a href="https://github.com/YuriSiman" target="_blank">
+      <img alt="GitHub" src="https://img.shields.io/badge/github-perfil-%237159c1?style=for-the-badge&logo=github" />
+    </a>
+    <a href="https://yurisiman.com.br" target="_blank">
+      <img alt="Site" src="https://img.shields.io/badge/site-yurisiman-E0A80D?style=for-the-badge&logo=Purism" />
+    </a>
+    <a href="https://www.linkedin.com/in/yurisiman/" target="_blank">
+      <img alt="Linkedin" src="https://img.shields.io/badge/linkedin-social-0A66C2?style=for-the-badge&logo=LinkedIn" />
+    </a>
+    <a href="mailto:contato@yurisiman.com.br" target="_blank">
+      <img alt="Gmail" src="https://img.shields.io/badge/email-contato-EA4335?style=for-the-badge&logo=Gmail" />
+    </a>
+</div>
 
-Tenho como objetivo documentar conceitos essenciais sobre Banco de Dados e exercícios para que possa servir de consulta e fonte de estudos sobre Banco de Dados SQL.  
+<br/>
 
-### Clone
+## :clipboard: Sobre o Projeto
 
-Clone este repositório em sua máquina local usando:  
+Este repositório foi criado com o objetivo de ser uma fonte de documentação e consulta sobre os principais comandos do SQL Server.
 
-```
-git clone https://github.com/YuriSiman/exercises-database-sql.git
-```
-
-## :clipboard: Tópicos
-
-* [Conceitos](https://github.com/YuriSiman/exercises-database-sql#conceitos)  
-* [Exercícios](https://github.com/YuriSiman/exercises-database-sql#exercicios)  
-
---- 
-
-## :rocket: Vamos Começar  
-
-## Conceitos
-
-## SGBD
-
-O SGBD é software que facilita o processo de definição, construção, manipulação e compartilhamento de bancos de dados entre 
-diversos usuários e aplicações.  
-
-## Normalização
-
-Normalização é o processo de análise dos esquemas de relações com base nas dependências funcionais dos atributos visando:  
-
-– Minimizar redundância de dados
-– Minimizar anomalias de atualização  
-
-Normalização é o processo através do qual esquemas de relação são sucessivamente refinados até que satisfaçam determinadas propriedades ou formas normais.
-
-#### Primeira Forma Normal (1FN)  
-
-Um esquema de relação está na 1FN:  
-
-– Se todos os seus atributos estiverem definidos em domínios que contenham apenas valores atômicos (simples, monovalorados) e não por conjuntos de valores.  
-– A interseção de uma linha e coluna (célula) deve possuir apenas um único valor.  
-
-#### Segunda Forma Normal (2FN)  
-
-Um esquema de relação está na 2FN:  
-
-– Se a relação estiver na 1FN.  
-– Todos os atributos que não fazem parte da chave primária devem depender funcionalmente de todos os atributos da chave primária.  
-– Quando a chave primária é composta: A dependência funcional não pode ser parcial, isto é, deve ser total.  
-– Dependência parcial: Quando se puder retirar algum atributo e a dependência continuar existindo.  
-
-#### Terceira Forma Normal (3FN)  
-
-Um esquema de relação está na 3FN:  
-
-– Se a relação estiver na 2FN.  
-– Todos os atributos da relação devem depender diretamente da chave primária, isto é, não podem depender transitivamente da chave primária.  
-
-## Alguns Tipos de Dados Disponíveis  
-
-Tipo de Dados | Descrição
------------- | -------------
-CHAR(n) | Strings de caracteres de tamanho fixo
-VARCHAR(n) | Strings de caracteres de tamanho variável
-INT | Números inteiros (2^10)
-SMALLINT | Números inteiros pequenos (2^5)
-NUMERIC(p,s) | Números exatos com casas decimais Ex: NUMERIC(7,2) tem 5 inteiros e 2 decimais
-DATE | Data
-TIME | Hora
-DATETIME | Data e hora dd/mm/yyyy hh:mm:ss.ttt
-SMALLDATETIME | Data e hora dd/mm/yyyy hh:mm
-
-Data Types: https://docs.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?redirectedfrom=MSDN&view=sql-server-ver15
+Aproveite! :octocat:
 
 ---
 
-## Linguagem SQL - DDL (Data Definition Language)  
+## :pencil: Pré-requisitos
 
-Os comandos DDL para **criar**, **alterar** e **remover** tabelas e outros objetos são:  
+1. Se você não possui o SQL Server instalado, acesse [aqui](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) e instale conforme o seu sistema operacional.
+2. Instale o SQL Server Management Studio para gerenciar bancos de dados e trabalhar com o SQL Server. Instale [aqui](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
+3. Clone este repositório em sua máquina local
 
-* CREATE - Cria
-* ALTER - Altera
-* DROP - Remove
+   ```sh
+   git clone https://github.com/YuriSiman/learn-sql-server.git
+   ```
 
-Criando um banco de dados:
+---
 
-Verificando se o banco de dados já existe
-```
-IF DB_ID ('teste') IS NULL
-	CREATE DATABASE teste
-```
+## :dart: Tópicos
 
-Ou, criando o banco de dados
-```
+<details>
+  <summary>DDL - Linguagem de Definição de Dados</summary>
+  <ul>
+    <li><a href="#create">CREATE</a></li>
+    <li><a href="#alter">ALTER</a></li>
+    <li><a href="#drop">DROP</a></li>
+    <li><a href="#truncate-table">TRUNCATE TABLE</a></li>
+  </ul>
+</details>
+<details>
+  <summary>DML - Linguagem de Manipulação de Dados</summary>
+  <ul>
+    <li><a href="#insert">INSERT</a></li>
+    <li><a href="#select">SELECT</a></li>
+    <li><a href="#update">UPDATE</a></li>
+    <li><a href="#delete">DELETE</a></li>
+  </ul>
+</details>
+
+---
+
+## :rocket: Vamos Começar
+
+### DDL - Linguagem de Definição de Dados
+
+<div id="create"></div>
+
+### CREATE
+
+Criando uma base de dados.
+
+```sql
 CREATE DATABASE teste
 ```
 
-Entrando no contexto do banco de dados:
+Criando uma tabela.
 
-```
-USE teste
-```
-
-Criando tabelas com PRIMARY KEY, FOREIGN KEY, UNIQUE e definindo CONSTRAINT:
-
-* PRIMARY KEY - A constraint Primary Key (chave primaria), não permite valores nulos e impõe a exclusividade de linhas.  
-* FOREIGN KEY - Uma Foreign key (chave estrangeira), impõe a integridade referencial, ela é definida em um conjunto de atributos em que é chamada de tabela de referencia e aponta para os atributos de chaves candidatas (primary key, unique constraint).  
-* UNIQUE - A Constraint Unique, também impõe a exclusividade de linhas, porem, é um pouco parecida com a primary key, podem existir varias Unique Constraints na mesma tabela.  
-* CONSTRAINT - É usada para dar nome à restrição de integridade.  
-* IDENTITY - Tem como finalidade incrementar um valor a cada nova inserção.  
-
-```
-CREATE TABLE funcionarios 
+```sql
+CREATE TABLE Alunos
 (
-    Id int IDENTITY NOT NULL,
-    CPF char(11) NOT NULL,
-    Nome varchar(100) NOT NULL,
-    Salario numeric(7,2) NOT NULL,
-    Endereco varchar(200),
-    DataNascimento datetime NOT NULL,
-    Ativo char(1) NOT NULL DEFAULT 'S',
-    CONSTRAINT pk_funcionario PRIMARY KEY (Id),
-    CONSTRAINT un_funcionario UNIQUE (CPF)
-)
-
-CREATE TABLE departamentos
-(
-    Id int NOT NULL,
-    Nome varchar(100) NOT NULL,
-    Id_Funcionario int IDENTITY,
-    CONSTRAINT pk_departamento PRIMARY KEY (Id),
-    CONSTRAINT un_departamento UNIQUE (Nome),
-    CONSTRAINT fk_funcionario FOREIGN KEY (Id_funcionario) REFERENCES funcionarios (Id) ON DELETE NO ACTION
+	id INT PRIMARY KEY IDENTITY,
+	nome VARCHAR(80) NOT NULL,
+	cpf CHAR(11) NOT NULL,
+	data_cadastro DATE,
+	ativo BIT DEFAULT 1
 )
 ```
 
-Removendo uma tabela:  
+<div id="alter"></div>
+
+### ALTER
+
+Alterando uma tabela.
+
+```sql
 
 ```
-DROP TABLE departamentos
+
+<div id="drop"></div>
+
+### DROP
+
+
+
+<div id="truncate-table"></div>
+
+### TRUNCATE TABLE
+
+Deletando **somente os registros** de uma tabela.
+
+```sql
+TRUNCATE TABLE Alunos
 ```
 
-Removendo todas as linhas de uma tabela:  
+<p align="right"><a href="#top">Início ↑</a></p>
 
-```
-TRUNCATE TABLE departamentos
-```
+---
 
-Alterar a estrutura de uma tabela, adicionando, removendo ou alterando colunas e restrições:  
+### DML - Linguagem de Manipulação de Dados
 
-Incluir uma nova coluna, não é permitido configurar uma coluna NOT NULL, a menos que um valor DEFAULT seja informado, se criada como NULL, a coluna pode ser alterada depois para NOT NULL usando ALTER TABLE ... ALTER COLUMN:
+<div id="insert"></div>
 
-```
-ALTER TABLE funcionarios ADD Formacao varchar(200) NOT NULL DEFAULT 0
-```
+### INSERT
 
-Alterar especificação da coluna (tipo de dados, NULL etc.):
+Inserindo dados em uma tabela.
 
-```
-ALTER TABLE funcionarios ADD Nivel varchar(200) NULL
-ALTER TABLE funcionarios ALTER COLUMN Nivel varchar(200) NOT NULL
-```
-
-Excluir uma coluna fisicamente:
-
-```
-ALTER TABLE funcionarios DROP COLUMN Nivel
+```sql
+INSERT INTO Alunos
+VALUES
+('Yuri', '00000000001', GETDATE(), 1),
+('Felipe', '00000000001', GETDATE(), 1),
+('Henrique', '00000000001', GETDATE(), 1)
 ```
 
-Adicionar apenas uma restrição (a coluna deve existir):
+<div id="select"></div>
 
-```
-ALTER TABLE funcionarios ADD CONSTRAINT CK_ativo CHECK (ativo = 'S' OR ativo = 'N')
-```
+### SELECT
 
-Excluir uma restrição:
+Buscando todos os dados em uma tabela.
 
-```
-ALTER TABLE funcionarios DROP CONSTRAINT CK_ativo
+```sql
+SELECT * FROM Alunos
 ```
 
-## Linguagem SQL - DML (Data Manipulation Language)  
+Buscando dados específicos em uma tabela.
 
-Os comandos DML para **inserir**, **selecionar**, **atualizar** e **excluir** são:  
-
-* INSERT - Inserir
-* SELECT - Selecionar
-* UPDATE - Atualizar
-* DELETE - Excluir  
-
-Listando todos os funcionários:
-
-```
-SELECT * FROM funcionarios
+```sql
+SELECT nome, cpf FROM Alunos
 ```
 
-Recuperar o nome, a data de nascimento e o endereço dos funcionários que moram em ‘MG’:
+<div id="update"></div>
 
-```
-SELECT nom_empregado, dat_nascimento, dsc_endereco
-FROM funcionarios
-WHERE sig_uf = 'MG'
-```
+### UPDATE
 
-Recuperar o nome e o salário de todos os funcionarios que recebem igual ou maior que 2.500,00:
+Alterando **todos** os registros de uma tabela.
 
-```
-SELECT nom_empregado, val_salario
-FROM funcionarios
-WHERE val_salario >= 2500.00
+```sql
+UPDATE Alunos
+SET ativo = 0
 ```
 
-Recuperar os dados dos departamentos 1, 3 ou 5:
+Alterando os registros de uma tabela conforme uma condição
 
-```
-SELECT * FROM departamentos 
-WHERE cod_depto = 1 OR cod_depto = 3 
-OR cod_depto = 5
-
-ou
-
-SELECT * FROM departamentos
-WHERE cod_depto IN (1,3,5)
+```sql
+UPDATE Alunos
+SET ativo = 0
+WHERE id = 1
 ```
 
-Recuperar os empregados que moram no estado de “MG” ou “RJ”:
+<div id="delete"></div>
 
-```
-SELECT nome, nom_cidade, sig_uf
-FROM funcionarios
-WHERE sig_uf IN ('MG', 'RJ')
-```
+### DELETE
 
-Listar o código e o nome de todos os departamentos que começam com ‘V’ e cujo codigo está entre 1 e 3:
+Deletando dados em uma tabela.
 
-```
-SELECT d.cod_depto AS depto, d.nom_depto
-FROM departamento d
-WHERE d.nom_depto LIKE 'V%'
-AND d.cod_depto BETWEEN 1 AND 3
+```sql
+DELETE FROM Alunos
 ```
 
-SELECT DISTINCT pode remover duplicidade. Listar as cidades distintas de todos os empregados que moram em ‘MG’:
+Deletando 1 registro apenas da tabela.
 
-```
-SELECT DISTINCT e.nom_cidade
-FROM empregado AS e 
-WHERE e.sig_uf = 'MG'
+```sql
+DELETE TOP (1) FROM Alunos
 ```
 
-ORDER BY ordena o resultado do SELECT  
-Recuperar em ordem alfabética, a matrícula e o nome de todos os empregados do sexo masculino e do departamento 1:
+Deletando uma quantidade percentual de registros da tabela.
 
-```
-SELECT num_matricula, nome
-FROM funcionarios
-WHEREsex_empregado = 'M' 
-AND cod_depto = 1
-ORDER BY nome
+```sql
+DELETE TOP (10) PERCENT FROM Alunos
 ```
 
-Listar o nome do empregado, a UF e o salário dos empregados ordenando por UF ascendente e salário descendente:
-
-```
-SELECT e.nom_empregado, e.sig_uf, e.val_salario
-FROM empregado AS e
-ORDER BY e.sig_uf ASC, e.val_salario DESC
-```
-
-Valores nulos  
-Listar os empregados sem supervisores:  
-
-```
-SELECT e.nom_empregado FROM empregado AS e
-WHERE e.num_matricula_supervisor IS NULL
-```
-
-Listar os departamentos que possuem gerente:
-
-```
-SELECT d.nom_depto FROM departamento as d
-WHERE d.num_matricula_gerente IS NOT NULL
-```
-
-Listar o nome do empregado e o supervisor:
-
-```
-SELECT nom_empregado, num_matricula_supervisor
-FROM empregado
-
-ou
-
-SELECT nom_empregado, COALESCE(num_matricula_supervisor,0) 
-FROM empregado
-
-ou
-
-SELECT nom_empregado, COALESCE(CONVERT(varchar, 
-num_matricula_supervisor),'(sem supervisor)') 
-FROM empregado
-```
-
-TOP X linhas  
-É possível retornar apenas as primeiras X linhas de um SELECT (TOP X)  
-
-Listar 4 linhas da tabela de empregado:
-
-```
-SELECT TOP 4 num_matricula, nom_empregado
-FROM empregado
-```
-
-Listar os 3 empregados com os maiores salários da empresa:  
-
-```
-SELECT TOP 3 num_matricula, 
-nom_empregado, val_salario
-FROM empregado 
-ORDER BY val_salario DESC
-```
-
-INSERT - Inserção de linhas em uma tabela
-
-```
-INSERT INTO empregado VALUES (10,'Pelé','1970-02-03','Av das Americas 33','Curitiba','PR','M',1500.00,1,2)  
-INSERT INTO departamento VALUES (6,'Marketing',null,null)  
-INSERT INTO departamento (nom_depto, cod_depto) VALUES ('Escritório de Projetos', 7)
-```
-
-Inserção de linhas em uma tabela com IDENTITY:  
-
-```
-CREATE TABLE teste
-(
-codigo int not null PRIMARY KEY IDENTITY,
-nome varchar(100),
-data datetime DEFAULT CURRENT_TIMESTAMP
-)
-
-INSERT INTO teste VALUES (1,'Nome 1', CURRENT_TIMESTAMP)
-```
-
-Inserção de linhas em uma tabela com DEFAULT:
-
-```
-INSERT INTO teste (nome, data) 
-VALUES ('Nome 2', default)
-```
-
-DELETE - Exclusão de linhas de uma tabela  
-
-Excluir todos os empregados:  
-
-```
-DELETE FROM empregado
-```
-
-Excluir todos os empregados cuja UF é “PR”:
-
-```
-DELETE FROM empregado WHERE sig_uf='PR'
-```
-
-Excluir os departamentos com código >= 6:  
-
-```
-DELETE FROM departamento WHERE cod_depto >= 6
-```
-
-UPDATE - Atualização de valores das colunas  
-
-Atualizar o salário de todos os empregados do departamento 2 para 2000.00:
-
-```
-UPDATE empregado 
-SET val_salario = 2000.00
-WHERE cod_depto = 2
-```
-
-Aumentar em 20% o salário dos empregados do departamento 3 e transferi-los para o depto 5:  
-
-```
-UPDATE empregado 
-SET cod_depto= 5, val_salario = val_salario * 1.2
-WHERE cod_depto = 3
-```
-
-## Linguagem SQL - DML (Data Manipulation Language) - JOINS
-
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
 ## :vertical_traffic_light: Status do Projeto
 
-:construction: Projeto sendo implementado :construction:
+:heavy_check_mark: Concluído
 
 ---
 
 ## :thinking: Contribuindo
 
-> Para começar...
+> Passo a passo de como contribuir...
 
 ### Passo 1
 
@@ -414,7 +222,7 @@ WHERE cod_depto = 3
 
 ### Passo 2
 
-* :dancers: Clone este repositório para sua máquina local usando `git clone https://github.com/YuriSiman/exercises-database-sql.git`
+* :dancers: Clone este repositório para sua máquina local usando `git clone https://github.com/YuriSiman/learn-sql-server.git`
 
 ### Passo 3
 
@@ -445,16 +253,16 @@ Depois que seu pull request for mesclado, você pode excluir sua feature branch
 * Me chame pelo [Linkedin](https://www.linkedin.com/in/yurisiman/)  
 * Me mande um e-mail [contato@yurisiman.com.br](mailto:contato@yurisiman.com.br)  
 
-[![Github](https://img.shields.io/badge/github-profile-%237159c1?style=for-the-badge&logo=github)](https://github.com/YuriSiman)  
-[![Curriculum](https://img.shields.io/badge/site-curriculum-%23563D7C?style=for-the-badge&logo=bootstrap)](https://yurisiman.com.br)  
-
 ---
 
 ## :pencil: Licença
 
-[![License](https://img.shields.io/badge/license-mit-%23A6CE39?style=for-the-badge&logo=github)](https://github.com/YuriSiman/exercises-database-sql/blob/master/LICENSE)   
+<a href="https://github.com/YuriSiman/learn-sql-server/blob/master/LICENSE" target="_blank">
+  <img alt="LICENSE" src="https://img.shields.io/badge/license-mit-%23A6CE39?style=for-the-badge&logo=github" />
+</a>
 
----
+##
 
-Code your life...
+Code your life :octocat:
 
+<p align="right"><a href="#top">Início ↑</a></p>
