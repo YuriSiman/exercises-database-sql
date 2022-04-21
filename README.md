@@ -40,7 +40,7 @@ Aproveite! :octocat:
 ## :pencil: Pré-requisitos
 
 1. Se você não possui o SQL Server instalado, acesse [aqui](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) e instale conforme o seu sistema operacional.
-2. Instale o SQL Server Management Studio para gerenciar bancos de dados e trabalhar com o SQL Server. Instale [aqui](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
+2. Instale o [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15) para gerenciar bancos de dados e trabalhar com o SQL Server.
 3. Clone este repositório em sua máquina local
 
    ```sh
