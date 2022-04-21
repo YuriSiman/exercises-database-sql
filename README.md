@@ -113,7 +113,9 @@ Alterando uma tabela.
 
 ### DROP
 
+```sql
 
+```
 
 <div id="truncate-table"></div>
 
