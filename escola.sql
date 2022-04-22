@@ -137,3 +137,44 @@ SELECT * FROM Alunos
 ORDER BY id
 OFFSET 2 ROWS
 FETCH FIRST 2 ROWS ONLY
+
+-- Busque todos os alunos onde a sua cidade seja Minas Gerais
+
+SELECT * FROM Alunos WHERE cidade = 'Minas Gerais'
+
+-- Busque todos os alunos onde a sua cidade seja Minhas Gerais e que o id seja maior ou igual a 2
+
+SELECT * FROM Alunos WHERE cidade = 'Minas Gerais' AND id >= 2
+
+-- Busque todos os alunos onde a sua cidade seja Minas Gerais ou São Paulo
+
+SELECT * FROM Alunos WHERE cidade = 'Minas Gerais' OR cidade = 'São Paulo'
+
+-- Busque todos os alunos onde o id seja >= 3 e que o nome seja igual a 'Felipe' ou 'Henrique'
+
+SELECT * FROM Alunos WHERE id >= 3 AND (nome = 'Felipe' OR nome = 'Henrique')
+
+-- Busque todos os alunos onde o nome possua a letra 'e'
+
+SELECT * FROM Alunos WHERE nome LIKE '%e%'
+
+-- Busque todos os alunos onde o nome começa com 'Y'
+
+SELECT * FROM Alunos WHERE nome LIKE 'Y%'
+
+-- Busque todos os alunos onde o nome começa com 'Y' e termina com 'i'
+
+SELECT * FROM Alunos WHERE nome LIKE 'Y%i'
+
+-- Busque qual o id máximo que temos na tabela Alunos
+
+SELECT MAX(id) FROM Alunos
+
+-- Busque qual o id mínimo que temos na tabela Alunos
+
+SELECT MIN(id) FROM Alunos
+
+-- Busque o aluno onde o id é igual ao valor máximo de id na tabela
+
+SELECT * FROM Alunos WHERE id = (SELECT MAX(id) FROM Alunos)
+
