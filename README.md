@@ -78,7 +78,7 @@ Aproveite! :octocat:
 
 <div id="create"></div>
 
-### CREATE
+#### CREATE
 
 Criando uma base de dados.
 
@@ -101,7 +101,7 @@ CREATE TABLE Alunos
 
 <div id="alter"></div>
 
-### ALTER
+#### ALTER
 
 Alterando uma tabela.
 
@@ -111,15 +111,17 @@ Alterando uma tabela.
 
 <div id="drop"></div>
 
-### DROP
+#### DROP
+
+Deletando uma tabela.
 
 ```sql
-
+DROP TABLE Alunos
 ```
 
 <div id="truncate-table"></div>
 
-### TRUNCATE TABLE
+#### TRUNCATE TABLE
 
 Deletando **somente os registros** de uma tabela.
 
@@ -135,7 +137,7 @@ TRUNCATE TABLE Alunos
 
 <div id="insert"></div>
 
-### INSERT
+#### INSERT
 
 Inserindo dados em uma tabela.
 
@@ -149,7 +151,7 @@ VALUES
 
 <div id="select"></div>
 
-### SELECT
+#### SELECT
 
 Buscando todos os dados em uma tabela.
 
@@ -165,7 +167,7 @@ SELECT nome, cpf FROM Alunos
 
 <div id="update"></div>
 
-### UPDATE
+#### UPDATE
 
 Alterando **todos** os registros de uma tabela.
 
@@ -184,7 +186,7 @@ WHERE id = 1
 
 <div id="delete"></div>
 
-### DELETE
+#### DELETE
 
 Deletando dados em uma tabela.
 
