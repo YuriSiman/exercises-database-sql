@@ -8,7 +8,7 @@ GO
 
 -------------------------------------------------------
 
--- Criando as Tabelas
+-- Criando as Tabelas ---------------------------------
 
 CREATE TABLE Alunos
 (
@@ -61,7 +61,7 @@ GO
 
 -------------------------------------------------------
 
--- Inserindo Registros
+-- Inserindo Registros --------------------------------
 
 INSERT INTO Alunos (nome, cpf, cidade, estado, data_nascimento)
 VALUES
@@ -105,7 +105,7 @@ GO
 
 -------------------------------------------------------
 
--- Cláusulas e Operadores
+-- Cláusulas e Operadores -----------------------------
 
 -- Busque quais cidades e estados estão cadastradas na tabela Alunos, sem dados duplicados
 
@@ -229,7 +229,7 @@ SELECT * FROM Alunos WHERE id BETWEEN 2 AND 4
 
 -------------------------------------------------------
 
--- JOINS
+-- JOINS ----------------------------------------------
 
 -- INNER JOIN
 -- Busque os Cursos registrados e suas respectivas Categorias
@@ -295,5 +295,56 @@ SELECT 'FIM'
 UNION ALL
 SELECT 'FIM'
 
+-------------------------------------------------------
 
+-- Transaction (Garantindo a integridade dos dados) ---
 
+-- Atualize a descrição de todas as Categorias para Uppercase e exclua a Categoria de id 4
+
+BEGIN TRANSACTION -- Iniciando uma transação
+
+UPDATE Categorias
+SET descricao = UPPER(descricao)
+WHERE id > 0
+
+GO
+
+DELETE Categorias
+WHERE id = 4
+
+GO
+
+COMMIT -- Confirmando as modificação da transação
+
+ROLLBACK -- Desfazendo as modificações da transação
+
+-- Save Point (Fazer ROLLBACk em um determinado ponto da Transação)
+-- Insira dois novos registros de Categorias e salve, depois atualize um dos registros de Categorias. Volte ao ponto que foi salvo, desfazendo o UPDATE do registro atualizado
+
+BEGIN TRANSACTION
+
+INSERT INTO Categorias (descricao, cadastrado_em)
+VALUES
+('Categoria Nova 1', GETDATE()),
+('Categoria Nova 2', GETDATE())
+
+GO
+
+SAVE TRANSACTION AtualizacaoPoint
+
+UPDATE Categorias
+SET descricao = 'Aplicação WEB'
+WHERE descricao = 'WEB'
+
+GO
+
+SELECT * FROM Categorias
+
+ROLLBACK TRANSACTION AtualizacaoPoint
+COMMIT
+
+SELECT * FROM Categorias
+
+-------------------------------------------------------
+
+-- T-SQL ----------------------------------------------
