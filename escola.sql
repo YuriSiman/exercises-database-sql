@@ -131,6 +131,12 @@ SELECT TOP 4 * FROM Alunos
 
 SELECT TOP 10 PERCENT * FROM Alunos
 
+-- Busque em paginação os registros de alunos a partir do aluno de id = 3
+
+SELECT * FROM Alunos 
+ORDER BY id
+OFFSET 2 ROWS
+
 -- Busque em paginação os registros de alunos a partir do aluno de id = 3, após, retorne apenas os próximos 2 registros
 
 SELECT * FROM Alunos 
@@ -177,4 +183,117 @@ SELECT MIN(id) FROM Alunos
 -- Busque o aluno onde o id é igual ao valor máximo de id na tabela
 
 SELECT * FROM Alunos WHERE id = (SELECT MAX(id) FROM Alunos)
+
+-- Busque a quantidade de registros que existem na tabela Cursos
+
+SELECT COUNT(*) FROM Cursos 
+
+-- Busque a soma da horas de todos os cursos
+
+SELECT SUM(total_horas) FROM Cursos
+
+-- Busque a quantidade de registros que existem na tabela Cursos, a soma das horas e a soma dos valores. Informe os nomes respectivos para cada coluna.
+
+SELECT COUNT(*) as total_registros,
+SUM(total_horas) as total_horas,
+SUM(valor) as valor 
+FROM Cursos
+
+-- Busque todas as cidades e estados de forma agrupada da tabela Alunos
+
+SELECT cidade, estado FROM Alunos
+GROUP BY cidade, estado
+
+-- Busque todas as cidades e estados de forma agrupada da tabela Alunos, e retorne em outra coluna a quantidade que tem de cada estado
+
+SELECT cidade, estado, COUNT(*) as total_estados FROM Alunos
+GROUP BY cidade, estado
+
+-- Busque de forma agrupada todas as cidades e estados que tenham mais de 1 registro cadastrado na tabela Alunos, e retorne em outra coluna a quantidade que tem de cada estado
+
+SELECT cidade, estado, COUNT(*) as total FROM Alunos
+GROUP BY cidade, estado
+HAVING COUNT(*) > 1
+
+-- Busque todos os alunos que possuam os id's 2 e 4
+
+SELECT * FROM Alunos WHERE id IN (2, 4)
+
+-- Busque todos os alunos pelo id em uma subquery
+
+SELECT * FROM Alunos WHERE id IN (SELECT id FROM Alunos)
+
+-- Busque todos os alunos que estejam entre os valores 2 e 4
+
+SELECT * FROM Alunos WHERE id BETWEEN 2 AND 4
+
+-------------------------------------------------------
+
+-- JOINS
+
+-- INNER JOIN
+-- Busque os Cursos registrados e suas respectivas Categorias
+
+SELECT * FROM Cursos cr
+INNER JOIN Categorias ca
+ON cr.categoria_id = ca.id
+
+-- Busque a descrição dos Cursos registrados e a descrição de suas respectivas Categorias
+
+SELECT cr.descricao as Cursos, ca.descricao as Categorias FROM Cursos cr
+INNER JOIN Categorias ca
+ON cr.categoria_id = ca.id
+
+-- LEFT JOIN
+-- Busque as Categorias registradas e seus respectivos Cursos, até mesmo as Categorias que não possuem cursos registrados
+
+SELECT * FROM Categorias ca
+LEFT JOIN Cursos cr
+ON ca.id = cr.categoria_id
+
+-- RIGHT JOIN
+-- Busque as Categorias registradas e seus respectivos Cursos, até mesmo as Categorias que não possuem cursos registrados
+
+SELECT * FROM Cursos cr
+RIGHT JOIN Categorias ca
+ON cr.categoria_id = ca.id
+
+-- FULL JOIN (Combinação entre o LEFT JOIN e o RIGHT JOIN)
+-- Busque todos os registros de Categorias e Cursos, independente se há valores nulos ou não
+
+SELECT * FROM Cursos cr
+FULL JOIN Categorias ca
+ON cr.categoria_id = ca.id
+-- ou
+SELECT * FROM Categorias ca
+FULL JOIN Cursos cr
+ON cr.categoria_id = ca.id
+
+-- UNION
+-- Busque em uma mesma consulta (em uma mesma coluna) a descrição do Curso de id '1', a descrição de sua categoria e imprima um valor dinâmico 'FIM', não pegando valores duplicados
+
+SELECT descricao FROM Cursos
+WHERE id = 1
+UNION
+SELECT descricao FROM Categorias
+WHERE id = 1
+UNION
+SELECT 'FIM'
+UNION 
+SELECT 'FIM'
+
+-- UNION ALL
+-- Busque em uma mesma consulta (em uma mesma coluna) a descrição do Curso de id '1', a descrição de sua categoria e imprima um valor dinâmico 'FIM', pegando valores duplicados caso existam
+
+SELECT descricao FROM Cursos
+WHERE id = 1
+UNION ALL
+SELECT descricao FROM Categorias
+WHERE id = 1
+UNION ALL
+SELECT 'FIM'
+UNION ALL
+SELECT 'FIM'
+
+
 
